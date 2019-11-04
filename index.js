@@ -100,9 +100,18 @@ fetch(url2)
 
 /*To Do:
 
-Establish where I need to set up displayResults. It is after both Get requests,
+Determine where I need to set up displayResults. It is after both Get requests,
 but is it inside of the second fetch, or after, and how?
 
-Establish how to reference the lat and lng info from api1 in api2's Get request
+Determine how to reference the lat and lng info from api1 in api2's Get request
 
+Establish pages navigation feature
+
+Determine how to utilize multiple endpoints of the same API (ex. Campgrounds and
+alerts)
+
+Expand result information displayed
+
+Determine how to use multiple search parameters for search bar (ex. stateCode and
+q (query))
 */
