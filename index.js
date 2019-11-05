@@ -15,7 +15,7 @@ function formatQueryParams(params) {
   return queryItems.join('&');
 }
 
-//function to render html
+//function to render both parkObj and weatherObj
 
 function displayResults(parkObj, weatherObj) {
   /*
@@ -24,7 +24,7 @@ function displayResults(parkObj, weatherObj) {
   console.log(parkObj)
   console.log(weatherObj)
   $('#results-list').empty();
-  for (let i=0; i < parkObj.data.length; i++){
+  for (let i=0; i <parkObj.data.length; i++){
     $('#results-list').append(
       `<li><h3>${parkObj.data[i].name}</h3>
       <p>State: ${parkObj.data[i].addresses.stateCode}
@@ -39,7 +39,7 @@ function displayResults(parkObj, weatherObj) {
   $('#results').removeClass('hidden');
 }
 
-//function to set api 1 params
+//function to set api 1 params and send GET request
 
 function getNPSResults(query) {
   const params = {
@@ -48,13 +48,9 @@ function getNPSResults(query) {
     fields: "addresses",
     api_key: apiNPS
   };
-
-//function to call api 1
   const queryString1 = formatQueryParams(params)
   const url1 = urlNPS + '?' + queryString1;
-
   console.log(url1);
-
   fetch(url1)
     .then(response => {
       if (response.ok) {
@@ -63,7 +59,7 @@ function getNPSResults(query) {
       throw new Error(response.statusText);
     })
     .then(function(parkObj) {
-      for (let i=0; i<parkObj.length; i++) {
+      for (let i=0; i<parkObj.data.length; i++) {
         getWeatherResults(parkObj[i]);
       }
     })
@@ -72,8 +68,7 @@ function getNPSResults(query) {
     });
   }
 
-
-  //function to set api 2 params
+  //function to set api 2 params and send GET request
 
 function getWeatherResults(parkObj) {
   const resultLat=parkObj.latLong.lat;
@@ -83,7 +78,6 @@ function getWeatherResults(parkObj) {
     lat: resultLat,
     lon: resultLong
   };
-//function to call api 2
   const queryString2= formatQueryParams(params)
   const url2= urlWthr + '?' + queryString2;
   console.log(url2);
@@ -113,14 +107,6 @@ $(function(){
 
 
 /*To Do:
-
 Establish pages navigation feature
-
-Determine how to utilize multiple endpoints of the same API (ex. Campgrounds and
-alerts)
-
 Expand result information displayed
-
-Determine how to use multiple search parameters for search bar (ex. stateCode and
-q (query))
 */
