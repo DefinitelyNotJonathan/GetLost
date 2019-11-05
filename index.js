@@ -17,24 +17,27 @@ function formatQueryParams(params) {
 
 //function to render html
 
-function displayResults(responseJson, responseJson2) {
-  console.log(responseJson)
-  console.log(responseJson2)
+function displayResults(parkObj, weatherObj) {
+  /*
+  @todo implement rendering for both objects
+  */
+  console.log(parkObj)
+  console.log(weatherObj)
   $('#results-list').empty();
-  for (let i=0; i < responseJson.data.length; i++){
+  for (let i=0; i < parkObj.data.length; i++){
     $('#results-list').append(
-      `<li><h3>${responseJson.data[i].name}</h3>
-      <p>State: ${responseJson.data[i].addresses.stateCode}
-      <p>Designation: ${responseJson.data[i].accessibility.classifications}</p>
-      <p>Description: ${responseJson.data[i].description}</p>
-      <p>Weather Info: ${responseJson.data[i].weatherOverview}</p>
-      <p>Forecast: ${responseJson2.forecast}</p>
-      <p>Directions: ${responseJson.data[i].directionsUrl}</p>
-      <p>Website: ${responseJson.data[i].reservationsUrl}</p>
+      `<li><h3>${parkObj.data[i].name}</h3>
+      <p>State: ${parkObj.data[i].addresses.stateCode}
+      <p>Designation: ${parkObj.data[i].accessibility.classifications}</p>
+      <p>Description: ${parkObj.data[i].description}</p>
+      <p>Weather Info: ${parkObj.data[i].weatherOverview}</p>
+      <p>Forecast: ${weatherObj.forecast}</p>
+      <p>Directions: ${parkObj.data[i].directionsUrl}</p>
+      <p>Website: ${parkObj.data[i].reservationsUrl}</p>
       </li>`
     )};
   $('#results').removeClass('hidden');
-};
+}
 
 //function to set api 1 params
 
@@ -47,63 +50,69 @@ function getNPSResults(query) {
   };
 
 //function to call api 1
+  const queryString1 = formatQueryParams(params)
+  const url1 = urlNPS + '?' + queryString1;
 
-const queryString1 = formatQueryParams(params)
-const url1 = urlNPS + '?' + queryString1;
+  console.log(url1);
 
-console.log(url1);
+  fetch(url1)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statusText);
+    })
+    .then(function(parkObj) {
+      for (let i=0; i<parkObj.length; i++) {
+        getWeatherResults(parkObj[i]);
+      }
+    })
+    .catch(err => {
+      $('#js-error-message').text(`Something went wrong: ${err.message}`);
+    });
+  }
 
-fetch(url1)
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error(response.statusText);
-  })
-  .catch(err => {
-    $('#js-error-message').text(`Something went wrong: ${err.message}`);
-  });
 
   //function to set api 2 params
 
-  function getResults(query) {
-    //const to set up lat and lon as references of api1 lat and lng results
-    const resultLat =;
-    const resultLon = ;
-    //
-    const params = {
-      api_key: apiWthr,
-      lat: resultLat,
-      lon: resultLon
-    };
-
+function getWeatherResults(parkObj) {
+  const resultLat=parkObj.latLong.lat;
+  const resultLong=parkObj.latLong.lng;
+  const params= {
+    api_key: apiWthr,
+    lat: resultLat,
+    lon: resultLong
+  };
 //function to call api 2
+  const queryString2= formatQueryParams(params)
+  const url2= urlWthr + '?' + queryString2;
+  console.log(url2);
+  fetch(url2)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statusText);
+    })
+    .then (weatherObj => {displayResults (parkObj, weatherObj);
+    })
+    .catch(err => {
+      $('#js-error-message').text(`Something went wrong: ${err.message}`);
+    });
+  }
 
-const queryString2 = formatQueryParams(params)
-const url2 = urlWthr + '?' + queryString2;
 
-console.log(url2);
+//form watcher
 
-fetch(url2)
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error(response.statusText);
-  })
-  .catch(err => {
-    $('#js-error-message').text(`Something went wrong: ${err.message}`);
+$(function(){
+  $('#js-form').submit(function(e) {
+    e.preventDefault();
+    getNPSResults($('#js-search-term').val());
   });
-
-
+})
 
 
 /*To Do:
-
-Determine where I need to set up displayResults. It is after both Get requests,
-but is it inside of the second fetch, or after, and how?
-
-Determine how to reference the lat and lng info from api1 in api2's Get request
 
 Establish pages navigation feature
 
