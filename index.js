@@ -1,11 +1,18 @@
+//TEST VERSION WITH DIFFERENT WEATHER API
+
+/*Line 40 is the only line I am playing with/uncertain of. Looking at whether or
+ not I need [i] for Timeframes.*/
+
 'use strict';
 
 //fetch and api variables
 
 const apiNPS = 'IfcsBFYkZPOU1J024K3TaNhMYXtHZ7bCHqZhtxrP';
 const urlNPS = 'https://developer.nps.gov/api/v1/campgrounds';
-const apiWthr = 'ghBbVfHMkzWpDb2k4bL8SrbRvcUFJd';
-const urlWthr = 'https://www.amdoren.com/api/weather.php';
+const apiWthr = 'bef3fc1d798647285a40a276507cf08a';
+const urlWthr = ' http://api.weatherunlocked.com/api/forecast/us.';
+const idWthr = '133c3d86';
+
 
 //function to format query format query parameters
 
@@ -18,9 +25,6 @@ function formatQueryParams(params) {
 //function to render both parkObj and weatherObj
 
 function displayResults(parkObj, weatherObj) {
-  /*
-  @todo implement rendering for both objects
-  */
   console.log(parkObj)
   console.log(weatherObj)
   $('#results-list').empty();
@@ -31,7 +35,8 @@ function displayResults(parkObj, weatherObj) {
       <p>Designation: ${parkObj.data[i].accessibility.classifications}</p>
       <p>Description: ${parkObj.data[i].description}</p>
       <p>Weather Info: ${parkObj.data[i].weatherOverview}</p>
-      <p>Forecast: ${weatherObj.forecast}</p>
+      <p>Forecast: ${weatherObj.Days[i].Timeframes[i].date}</p>
+      <p>${weatherObj.Days[i].Timeframes[i].wx_desc}</p>
       <p>Directions: ${parkObj.data[i].directionsUrl}</p>
       <p>Website: ${parkObj.data[i].reservationsUrl}</p>
       </li>`
@@ -60,7 +65,7 @@ function getNPSResults(query) {
     })
     .then(function(parkObj) {
       for (let i=0; i<parkObj.data.length; i++) {
-        getWeatherResults(parkObj[i]);
+        getWeatherResults(parkObj.data[i].addresses[0].postalCode);
       }
     })
     .catch(err => {
@@ -71,15 +76,13 @@ function getNPSResults(query) {
   //function to set api 2 params and send GET request
 
 function getWeatherResults(parkObj) {
-  const resultLat=parkObj.latLong.lat;
-  const resultLong=parkObj.latLong.lng;
+  const zip= parkObj;
   const params= {
-    api_key: apiWthr,
-    lat: resultLat,
-    lon: resultLong
+    app_id:idWthr,
+    api_key:apiWthr
   };
   const queryString2= formatQueryParams(params)
-  const url2= urlWthr + '?' + queryString2;
+  const url2= urlWthr + zip + '?' + queryString2;
   console.log(url2);
   fetch(url2)
     .then(response => {
@@ -95,7 +98,6 @@ function getWeatherResults(parkObj) {
     });
   }
 
-
 //form watcher
 
 $(function(){
@@ -105,6 +107,9 @@ $(function(){
   });
 })
 
+/*problem: lat and lng values are frequently not populated from NPS API. Could
+use address to then run through Google Maps Geocoding and then extract the lat
+and lng*/
 
 /*To Do:
 Establish pages navigation feature
