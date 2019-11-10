@@ -72,7 +72,6 @@ function getParks() {
         }
 
         if(i === response.data.length - 1){
-          // run this block after the last iteration has finished
           console.log('all park objects:');
           console.log(parks);
         }
@@ -87,10 +86,6 @@ function getParks() {
 
 function getWeather(target_item, index){
 
-  // when working inside this function, remember that this function
-  // is getting iterated over with each park object returned, so
-  // we are only interested in the single iteration being called once at a time -> target_item
-
   const queryString = formatQueryParams({
     app_id:idWthr,
     app_key:apiWthr
@@ -100,9 +95,9 @@ function getWeather(target_item, index){
   console.log('target_item:');
   console.log(target_item);
   if(target_item['addresses'].hasOwnProperty('postalCode')){
-    location_zip = target_item['addresses']['postalCode'];// only a single postal code returned
+    location_zip = target_item['addresses']['postalCode'];
   }else if(target_item['addresses'].hasOwnProperty('length') && target_item['addresses'].length > 0){
-    location_zip = target_item['addresses'][0].postalCode; // there are more than 1 zip code supplied, we'll take the first one
+    location_zip = target_item['addresses'][0].postalCode; // solve problem with more than one zip code
   }
   if(!location_zip){
     console.log('Whoops! No zip code found!');
@@ -188,7 +183,6 @@ function formatQueryParams(params) {
 $(function(){
   $('#js-form').submit(function(e) {
     e.preventDefault();
-    // getNPSResults($('#js-search-term').val());
     getParks();
   });
 })
