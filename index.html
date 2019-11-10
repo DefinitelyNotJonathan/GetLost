@@ -1,29 +1,46 @@
+
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Get Lost-Camp Finder</title>
-    <link rel="shortcut icon" href="#">
-    <link rel="stylesheet" href="main.css">
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Get Lost-Camp Finder</title>
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="input_wrapper">
+    <div class="logo_wrapper">
+      <span>GET</span>
+      <span>LOST</span>
+    </div>
     <form id="js-form" action="index.html" method="post">
-      <input type="search" name="searchbar" id="js-search-term" placeholder="Search by state" value="wa">
-      <input type="submit" name="searchButton" value="Search">
+      <input type="search" name="searchbar" id="js-search-term" placeholder="Search by State Code" value="">
+      <select name="limit" id="query-limit">
+        <option selected value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+      </select>
+      <input type="submit" name="searchButton" id="search-button" value="Find Camps">
     </form>
     <p id="js-error-message" class="error-message"></p>
-    <section id="results" class="hidden">
-      <div id="parkObjects">
-        <h2 class="loader">Park Results</h2>
-        <div id="park_results"></div>
+  </div>
+
+  <section id="results" class="hidden">
+    <div id="parkObjects">
+      <div class="title-wrap">
+        <h2 class="loader">Park Results<span id="result_count"></span></h2>
       </div>
-      <div id="result-list-wrapper">
-        <ul id="results-list"></ul>
-      </div>
-    </section>
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="index2.js"></script>
-  </body>
+      <div id="park_results"></div>
+    </div>
+  </section>
+  <footer class="footer">
+    <p>DefinitelyNotJonathan © 2019. All Rights Reserved.</p>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="js/index.js"></script>
+</body>
 
 </html>
