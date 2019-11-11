@@ -5,7 +5,7 @@
 const apiNPS ='IfcsBFYkZPOU1J024K3TaNhMYXtHZ7bCHqZhtxrP';
 const urlNPS ='https://developer.nps.gov/api/v1/campgrounds';
 const apiWthr ='bef3fc1d798647285a40a276507cf08a';
-const urlWthr ='http://api.weatherunlocked.com/api/forecast/us.';
+const urlWthr ='https://api.weatherunlocked.com/api/forecast/us.';
 const idWthr ='133c3d86';
 
 var parks = [];
