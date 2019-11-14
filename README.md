@@ -10,9 +10,13 @@
 
 <h2>Images</h2>
 
-<img src="https://github.com/DefinitelyNotJonathan/apiHackCapstoneProject/blob/master/images/GetLostSS1.jpg">
+<img src="https://github.com/DefinitelyNotJonathan/apiHackCapstoneProject/blob/master/GetLostSS1.jpg">
 
 <br>
 
-<img src="
+<img src="https://github.com/DefinitelyNotJonathan/apiHackCapstoneProject/blob/master/GetLostSS2.jpg">
+
+<br>
+
+<img src="https://github.com/DefinitelyNotJonathan/apiHackCapstoneProject/blob/master/GetLostSS3.jpg">
 
