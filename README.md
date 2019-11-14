@@ -6,17 +6,17 @@
 
 <p>Technologies: HTML/CSS/JS/JQUERY</p>
 
-<p><a href="https://definitelynotjonathan.github.io/apiHackCapstoneProject/">Live Link</a></p>
+<p><a href="https://definitelynotjonathan.github.io/GetLost/">Live Link</a></p>
 
 <h2>Images</h2>
 
-<img src="https://github.com/DefinitelyNotJonathan/apiHackCapstoneProject/blob/master/GetLostSS1.jpg">
+<img src="https://github.com/DefinitelyNotJonathan/GetLost/blob/master/images/GetLostSS1.jpg">
 
 <br>
 
-<img src="https://github.com/DefinitelyNotJonathan/apiHackCapstoneProject/blob/master/GetLostSS2.jpg">
+<img src="https://github.com/DefinitelyNotJonathan/GetLost/blob/master/images/GetLostSS2.jpg">
 
 <br>
 
-<img src="https://github.com/DefinitelyNotJonathan/apiHackCapstoneProject/blob/master/GetLostSS3.jpg">
+<img src="https://github.com/DefinitelyNotJonathan/GetLost/blob/master/images/GetLostSS3.jpg">
 
