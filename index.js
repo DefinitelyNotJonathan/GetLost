@@ -162,9 +162,9 @@ function displayWeather(resp, item, index){
   <p>Designation: ${item.accessibility.classifications}</p>
   <p>Description: ${item.description}</p>
   <p>Weather Info: ${item.weatheroverview}</p>
-  <p>Directions: <a href="${item.directionsUrl}">External Link</a></p>
+  <p>Directions: <a href="${item.directionsUrl}" target="_blank">External Link</a></p>
   <h4>7-Day Forecast</h4>
-  <div class="row forecast-row">${forecast_html}</div>
+  <div class="row forecast-row" name="forecast">${forecast_html}</div>
   </div>`;
   $(html).appendTo('[data-park-id='+index+']');
 

@@ -1,11 +1,18 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,500,600i,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Bangers&display=swap');
+
+body,html {
+  margin:0;
+  padding:0;
+  min-width:100%;
+}
 body{
-  margin: 0;
   font-family: 'Open Sans', sans-serif;
   position: relative;
   color: #224130;
+
+
 }
 #results{
   display:flex;
@@ -123,6 +130,7 @@ body{
   position:relative;
   min-height:20em;
   max-width: 100%;
+  overflow:hidden;
 }
 #parkObjects::before {
   content: '';
@@ -196,4 +204,38 @@ footer{
   color: #7aa28c;
   z-index: 9;
   font-size: 0.8rem;
+}
+
+@media screen and (min-width:568px) {
+
+  .title-wrap {
+    text-align:center;
+  }
+
+  .title-wrap > h2 {
+    margin-left:0;
+    font-size:30px;
+  }
+
+  #result_count {
+    margin-left: 1.2rem;
+    font-size: .9rem;
+    font-style: italic;
+    position: absolute;
+    top: 1.2rem;
+    right: -2.6rem;
+  }
+}
+
+@media screen and (min-width:768px) {
+  .title-wrap > h2 {
+    font-size:36px;
+  }
+  .input_wrapper {
+    padding-bottom:0;
+  }
+}
+
+@media screen and (min-width:1024px) {
+
 }
