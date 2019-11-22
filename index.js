@@ -45,6 +45,8 @@ function getParks() {
       }
 
       $('#result_count').text(response.data.length);
+    //  console.log('getParks() response data:');
+      //console.log(response.data);
       for (let i=0; i<response.data.length; i++) {
         let item = response.data[i];
         let name = '';
@@ -52,24 +54,26 @@ function getParks() {
         if(item && name){
 
           if(!item.hasOwnProperty('addresses')){
-            console.log('this result is missing the "addresses" field!');
+            //console.log('this result is missing the "addresses" field!');
           }else{
             $('#park_results').append('<div class="row" data-park-id="'+i+'"></div>');
             getWeather(item, i);
           }
 
         }else{
-          console.log('oops! something went wrong with this one:');
-          console.log(item)
+          //console.log('oops! something went wrong with this one:');
+          //console.log(item);
         }
 
         if(i === response.data.length - 1){
+          //console.log('all park objects:');
+          //console.log(parks);
         }
       }
     })
     .catch(err => {
-      console.log('error happened');
-      console.log(err);
+      //console.log('error happened');
+      //console.log(err);
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     })
     .finally( () => {
@@ -80,7 +84,7 @@ function getParks() {
 function getWeather(target_item, index){
 
   if(!target_item || !target_item.hasOwnProperty('addresses')){
-    console.log('there is no target_item!');
+    //console.log('there is no target_item!');
     return false;
   }
 
@@ -97,8 +101,8 @@ function getWeather(target_item, index){
     location_zip = target_item['addresses'][0].postalCode; // there are more than 1 zip code supplied,takes the first one
   }
   if(!location_zip){
-    console.log('Whoops! No zip code found!');
-    console.log(target_item);
+    //console.log('Whoops! No zip code found!');
+    //console.log(target_item);
     return;
   }
   const url = urlWthr + location_zip + '?' + queryString;
@@ -120,6 +124,8 @@ function getWeather(target_item, index){
 
     })
     .catch( err => {
+    //  console.log('error reported!');
+    //  console.log(err);
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
 }
@@ -127,14 +133,22 @@ function getWeather(target_item, index){
 function displayWeather(resp, item, index){
   let forecast = resp['Days'];
   if(!forecast || !forecast.hasOwnProperty('length') || !forecast.length){
-    console.log('could not cypher forecast!');
+    //console.log('could not cypher forecast!');
     return;
   }
   let forecast_html = '';
+
+  //console.log('displayWeather() forecast:', index);
+  //console.log(forecast);
+
   for (let i=0;i<forecast.length;i++){ // iterate over each day returned
     forecast_html += '<div class="col">';
     forecast_html += '<h5 class="">'+forecast[i]['date']+'</h5>';
     if(forecast[i].hasOwnProperty('Timeframes') && forecast[i].Timeframes.length > 0){ // iterate over each 'Timeframes' received within a day
+
+      //console.log('Timeframes: Day '+i);
+      //console.log(forecast[i].Timeframes);
+
       for ( let j=0;j<forecast[i].Timeframes.length;j++){
         let timeframe = forecast[i].Timeframes[j];
         forecast_html += '<div>'+timeframe['utctime']+': '+timeframe['wx_desc']+ '</div>';
