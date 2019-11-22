@@ -10,22 +10,26 @@
   </head>
   <body>
     <div class="input_wrapper">
-      <div class="logo_wrapper">
-        <span>GET</span>
-        <img class="logo" src="images/get-lost-logo-icon.svg" alt="get lost logo" />
-        <span>LOST</span>
-      </div>
-      <form id="js-form" action="index.html" method="post">
-        <input type="search" name="searchbar" id="js-search-term" placeholder="Search by State Code" value="">
-        <select name="limit" id="query-limit">
-          <option selected value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
-          <option value="25">25</option>
-        </select>
-        <input type="submit" name="searchButton" id="search-button" value="Find Camps">
-      </form>
+      <header>
+        <div class="logo_wrapper">
+          <span>GET</span>
+          <img class="logo" src="images/get-lost-logo-icon.svg" alt="get lost logo" />
+          <span>LOST</span>
+        </div>
+      </header>
+      <main>
+        <form id="js-form" action="index.html" method="post">
+          <input type="search" name="searchbar" id="js-search-term" placeholder="Search by State Code" value="">
+          <select name="limit" id="query-limit">
+            <option selected value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+          </select>
+          <input type="submit" name="searchButton" id="search-button" value="Find Camps">
+        </form>
+      </main>
       <p id="js-error-message" class="error-message"></p>
     </div>
 

@@ -45,8 +45,6 @@ function getParks() {
       }
 
       $('#result_count').text(response.data.length);
-      console.log('getParks() response data:');
-      console.log(response.data);
       for (let i=0; i<response.data.length; i++) {
         let item = response.data[i];
         let name = '';
@@ -62,12 +60,10 @@ function getParks() {
 
         }else{
           console.log('oops! something went wrong with this one:');
-          console.log(item);
+          console.log(item)
         }
 
         if(i === response.data.length - 1){
-          console.log('all park objects:');
-          console.log(parks);
         }
       }
     })
@@ -124,8 +120,6 @@ function getWeather(target_item, index){
 
     })
     .catch( err => {
-      console.log('error reported!');
-      console.log(err);
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
 }
@@ -137,18 +131,10 @@ function displayWeather(resp, item, index){
     return;
   }
   let forecast_html = '';
-
-  console.log('displayWeather() forecast:', index);
-  console.log(forecast);
-
   for (let i=0;i<forecast.length;i++){ // iterate over each day returned
     forecast_html += '<div class="col">';
     forecast_html += '<h5 class="">'+forecast[i]['date']+'</h5>';
     if(forecast[i].hasOwnProperty('Timeframes') && forecast[i].Timeframes.length > 0){ // iterate over each 'Timeframes' received within a day
-
-      console.log('Timeframes: Day '+i);
-      console.log(forecast[i].Timeframes);
-
       for ( let j=0;j<forecast[i].Timeframes.length;j++){
         let timeframe = forecast[i].Timeframes[j];
         forecast_html += '<div>'+timeframe['utctime']+': '+timeframe['wx_desc']+ '</div>';
